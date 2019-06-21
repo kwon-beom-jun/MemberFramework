@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- xmlns="http://www.springframework.org/schema/mvc" -->
+<beans:beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven /> <!--  xmlns="http://www.springframework.org/schema/mvc" 디폴트가 mvc라 <annotation-driven /> 이렇게 사용함 mvc것이라 그럼 -->
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- web-inf는 접근 불가이므로 사용자가 함부로 못들어오게 함. -->
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- 어노테이션으로 설정해놓으므로 bean을 사용 안함. *은 한개아님 상관없음 **모든것들 하지만 service와 dao는 못감. -->
+	<!-- controler는 baen안만들어서 sevice랑 dao를 못씀. 그래서 dao와 service측에서도 component를 함 -->
+	<context:component-scan base-package="com.kitri.**.controller" />
+	
+	<!-- 더 편한방법 -->
+	<!-- <context:component-scan base-package="com.kitri.**" /> -->
+	
+	<!-- 한글설정 어노테이션 방법도 있음.-->
+	<!-- @responsebody할때 한글 깨짐 현상 / ajax에서 받아오고 띄워줄때. -->
+	<!-- beans가 붙는 이유는 맨 위에 beans설정함.(xmlns:beans="http://www.springframework.org/schema/beans") -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<beans:bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<beans:property name="supportedMediaTypes">
+					<beans:list>
+						<beans:value>text/html;charset=utf-8</beans:value>
+						<beans:value>application/json;charset=utf-8</beans:value>
+					</beans:list>
+				</beans:property>
+			</beans:bean> 
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- 오류났을때 설정하기 -->
+	<!-- Resolver ~폴더로 이동시켜줌 -->
+	<!-- /user/login/login view의 이름 -->
+	<beans:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<beans:property name="exceptionMappings">
+			<beans:props>
+				<beans:prop key="org.springframework.web.HttpSessionRequiredException">/user/login/login</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
+</beans:beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
