@@ -17,6 +17,7 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
+	
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -41,6 +42,15 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
+		
+		
+		<!-- jdbc 5.1.5 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+		<!-- <dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>5.1.5.RELEASE</version>
+		</dependency> -->
 		
 		
 		
