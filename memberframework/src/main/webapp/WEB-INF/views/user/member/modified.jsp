@@ -15,9 +15,20 @@ align-content: center;
 
 $(function() {
 	
+		if ($('#name').val().trim().length == 0) {
+			alert('아이디 입력하기!!!');
+			return;
+		} else if ($('#pass').val().trim().length == 0) {
+			alert('비밀번호 입력하기!!!');
+			return;
+		} else if ($('#pass').val().trim().length != $('#passcheck').val().trim().length) {
+			alert('비밀번호 확인!!!');
+			return;
+		}
+	
 	$("#modified").click(function() {
 		
-		document.getElementById("memberform").action = "${root}/modified";
+		document.getElementById("memberform").action = "${root}/admin/modifyuser.kitri";
 		document.getElementById("memberform").submit();
 		
 	});
